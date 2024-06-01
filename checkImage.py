@@ -5,15 +5,13 @@ import numpy as np
 loaded_model = joblib.load("trained_model.joblib")
 
 
-def predict(X):
-    pred, conf = loaded_model.predict(X)
-    conf *= 100
-    conf = conf//1
-    pred = "human" if pred == 1 else "non human"
-    print(f'PREDICTION: {pred}, CONFIDENCE: {conf[0]}%')
-
-
 def PREDICT(image):
+    def predict(X):
+        pred, conf = loaded_model.predict(X)
+        conf *= 100
+        conf = conf//1
+        pred = "human" if pred == 1 else "non human"
+        print(f'PREDICTION: {pred}, CONFIDENCE: {conf[0]}%')
     image = np.array(image)/255.0
     image.resize((32, 32, 3))
     image = np.expand_dims(image, axis=0)
